@@ -5,6 +5,11 @@
  */
 package ahmadsyifaur.Quiz2;
 
+import ahmadsyifaur.Quiz2.komponen.Item;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
+import java.util.*;
+
 /**
  *
  * @author AhmadSyifaur<ahmadsyifaur11@gmail.com>
@@ -14,7 +19,12 @@ public class Main extends javax.swing.JFrame {
     /**
      * Creates new form Main
      */
+    private String code;
+    private DefaultComboBoxModel comboBoxModel;
+    private DefaultTableModel tableModel;
+    private final ArrayList<Item> items =new ArrayList<>();
     public Main() {
+        
         initComponents();
     }
 
@@ -33,7 +43,7 @@ public class Main extends javax.swing.JFrame {
         itemComboBox = new javax.swing.JComboBox<>();
         jumlahText = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        ItemTabel = new javax.swing.JTable();
         saveButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         newButton = new javax.swing.JButton();
@@ -46,10 +56,16 @@ public class Main extends javax.swing.JFrame {
 
         jLabel2.setText("Items");
 
+        codeText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                codeTextActionPerformed(evt);
+            }
+        });
+
         itemComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gula", "Susu", "Kopi" }));
         itemComboBox.setSelectedIndex(-1);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        ItemTabel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -61,14 +77,14 @@ public class Main extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Double.class, java.lang.Double.class
+                java.lang.String.class, java.lang.Float.class, java.lang.Integer.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(ItemTabel);
 
         saveButton.setText("Save");
         saveButton.addActionListener(new java.awt.event.ActionListener() {
@@ -87,6 +103,11 @@ public class Main extends javax.swing.JFrame {
         });
 
         addButton.setText("Add");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
 
         removeButton.setText("Remove");
 
@@ -157,6 +178,14 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_newButtonActionPerformed
 
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addButtonActionPerformed
+
+    private void codeTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codeTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_codeTextActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -193,6 +222,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable ItemTabel;
     private javax.swing.JButton addButton;
     private javax.swing.JButton cancelButton;
     private javax.swing.JTextField codeText;
@@ -200,7 +230,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jumlahText;
     private javax.swing.JButton newButton;
     private javax.swing.JButton removeButton;

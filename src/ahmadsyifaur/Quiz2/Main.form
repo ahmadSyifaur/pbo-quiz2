@@ -102,6 +102,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="codeText">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="codeTextActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="itemComboBox">
       <Properties>
@@ -127,13 +130,13 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable1">
+        <Component class="javax.swing.JTable" name="ItemTabel">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="3" rowCount="4">
                 <Column editable="true" title="Nama" type="java.lang.String"/>
-                <Column editable="true" title="Harga" type="java.lang.Double"/>
-                <Column editable="true" title="Jumlah" type="java.lang.Double"/>
+                <Column editable="true" title="Harga" type="java.lang.Float"/>
+                <Column editable="true" title="Jumlah" type="java.lang.Integer"/>
               </Table>
             </Property>
           </Properties>
@@ -165,6 +168,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Add"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="removeButton">
       <Properties>
