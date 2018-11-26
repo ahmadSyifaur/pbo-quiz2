@@ -111,7 +111,7 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jButtonSave)
-                            .addGap(18, 18, 18)
+                            .addGap(28, 28, 28)
                             .addComponent(jButtonCancel))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(10, 10, 10)
