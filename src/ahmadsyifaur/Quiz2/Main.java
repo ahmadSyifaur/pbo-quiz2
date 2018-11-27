@@ -162,28 +162,15 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        itemComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gula", "Susu", "Kopi" }));
+        itemComboBox.setModel(this.comBoxModel);
         itemComboBox.setSelectedIndex(-1);
-
-        ItemTabel.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Nama", "Harga", "Jumlah"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Float.class, java.lang.Integer.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+        itemComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemComboBoxActionPerformed(evt);
             }
         });
+
+        ItemTabel.setModel(this.tableModel);
         jScrollPane1.setViewportView(ItemTabel);
 
         saveButton.setText("Save");
@@ -194,6 +181,11 @@ public class Main extends javax.swing.JFrame {
         });
 
         cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         newButton.setText("New");
         newButton.addActionListener(new java.awt.event.ActionListener() {
@@ -210,6 +202,11 @@ public class Main extends javax.swing.JFrame {
         });
 
         removeButton.setText("Remove");
+        removeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -277,15 +274,53 @@ public class Main extends javax.swing.JFrame {
 
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
         // TODO add your handling code here:
+        this.newButton.setEnabled(false);
+        this.cancelButton.setEnabled(true);
+        this.addButton.setEnabled(true);
+        this.jumlahText.setEnabled(true);
+        this.itemComboBox.setEnabled(true);
+        this.codeText.setText(this.setCode());
     }//GEN-LAST:event_newButtonActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
+        String nama = this.itemComboBox.getSelectedItem().toString();
+        int jumlah = new Integer(this.jumlahText.getText());
+        if (cekBrgSudahAda(nama)) {
+            updateJumlah(nama, jumlah);
+        }else{
+            tableModel.addRow(addItem(nama, jumlah));
+        }
+        this.cekItem();
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void codeTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codeTextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_codeTextActionPerformed
+
+    private void itemComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_itemComboBoxActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        // TODO add your handling code here:
+        TransBaru();
+        this.kurangID();
+    }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
+        // TODO add your handling code here:
+        if(ItemTabel.getSelectedRow()<0) {
+            String alert = "Pilih item yang ingin dihapus !"; 
+            JOptionPane.showMessageDialog(this, alert, "Information", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+        
+            for(int i = 0; i < ItemTabel.getSelectedRows().length; i++) {
+                tableModel.removeRow(ItemTabel.getSelectedRow());
+            }
+        }
+        this.cekItem();
+    }//GEN-LAST:event_removeButtonActionPerformed
 
     /**
      * @param args the command line arguments
