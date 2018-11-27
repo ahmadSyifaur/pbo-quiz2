@@ -5,29 +5,129 @@
  */
 package ahmadsyifaur.Quiz2;
 
+import ahmadsyifaur.Quiz2.komponen.ComboBoxModel;
 import ahmadsyifaur.Quiz2.komponen.Item;
+import ahmadsyifaur.Quiz2.komponen.TableModel;
+import java.text.SimpleDateFormat;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import java.util.*;
-
+import javax.swing.JOptionPane;
 /**
  *
  * @author AhmadSyifaur<ahmadsyifaur11@gmail.com>
  */
 public class Main extends javax.swing.JFrame {
-
+    //digunakan untuk memberikan nomor pada transaksi
+    private int id=0;
+    //digunakan untuk menyimpan code transaksi
+    private String code;
+    //jComboBox model
+    private DefaultComboBoxModel comBoxModel;
+    //jTable Model
+    private DefaultTableModel tableModel;
+    //digunakan untuk menyimpan item yang dibeli
+    private final ArrayList<Item> items =new ArrayList<>();
     /**
      * Creates new form Main
      */
-    private String code;
-    private DefaultComboBoxModel comboBoxModel;
-    private DefaultTableModel tableModel;
-    private final ArrayList<Item> items =new ArrayList<>();
+ 
     public Main() {
-        
+        ComboBoxModel cbModel =new ComboBoxModel();
+        //meng-set Combobox item
+        this.comBoxModel=new DefaultComboBoxModel<>(cbModel.getNama().toArray());
+        TableModel tbModel= new TableModel();
+        //meng-set nama kolom pada tabel transaksi
+        this.tableModel=new DefaultTableModel(tbModel.getNamaKolom(), 0);
         initComponents();
     }
-
+    //digunakan untuk menambahkan nomor baru
+    private void tambahID(){
+        this.id+=1;
+    }
+    // digunakan untuk menghapus/ mengurangi nomor
+    private void kurangID(){
+        this.id-=1;
+    }
+    //meng-set code transaksi yang sesuai dengan tanggal sekarang 
+    private String setCode(){
+        this.tambahID();
+        String tgl = new SimpleDateFormat("yyMMdd").format(new Date());
+        this.code = String.format(tgl+"%02d", this.id);
+        return code;
+    }
+    
+    private Object[] addItem(String nama , int jumlah){
+        float harga=0;
+        ComboBoxModel items=new ComboBoxModel();
+        for (int i = 0; i < items.getNama().size(); i++) {
+            if (nama.equalsIgnoreCase(items.getNama().get(i))) {
+                harga = items.getHarga().get(i);
+            }
+        }
+        Object[] item={
+            nama,
+            harga,
+            jumlah
+        };
+        return item;
+    }
+    //mengupdate jumlah
+    private void updateJumlah(String nama, int tambah) {
+        ArrayList<String> item = new ArrayList<>();
+        for (int i = 0; i < tableModel.getRowCount(); i++){
+            item.add(tableModel.getValueAt(i, 0).toString());
+        }
+        for(int i = 0; i < item.size(); i++) {
+            if(item.get(i).equals(nama)) {
+                int jumlah = new Integer(tableModel.getValueAt(i, 2).toString());
+                tableModel.setValueAt(jumlah+tambah, i, 2);
+            } 
+        }
+    }
+    //melakukan pengecekan apakah barang yang dipilih sudah ada pada tabel atau belum
+    private boolean cekBrgSudahAda(String nama) {
+        boolean hasil = false;
+        ArrayList<String> item = new ArrayList<>();
+        for (int i = 0; i < tableModel.getRowCount(); i++){
+            item.add(tableModel.getValueAt(i, 0).toString());
+        }
+        for(String i : item) {
+            if(i.equals(nama)) {
+                hasil = true;
+            } 
+        }
+        return hasil;
+    } 
+    //pengecekan apakah table masih kosong
+    private boolean isEmpty() {
+        return this.ItemTabel.getModel().getRowCount()<=0;
+    }
+    
+    //mendisable tombol save dan remove ketika table masih kosong
+    private void cekItem() {
+        if(isEmpty()) {
+            this.saveButton.setEnabled(false);
+            this.removeButton.setEnabled(false);
+        } else {
+            this.saveButton.setEnabled(true);
+            this.removeButton.setEnabled(true);
+        }
+    }
+    // melakukan transaksi baru ketika transaksi sebelumnya telah sukses
+    private void TransBaru() {
+        this.jumlahText.setText("");
+        this.codeText.setText("");
+        this.newButton.setEnabled(true);
+        this.saveButton.setEnabled(false);
+        this.cancelButton.setEnabled(false);
+        this.addButton.setEnabled(false);
+        this.removeButton.setEnabled(false);
+        this.jumlahText.setEnabled(false);
+        this.itemComboBox.setEnabled(false);
+        this.tableModel.setRowCount(0);
+        this.items.clear();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -151,11 +251,12 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(codeText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(newButton))
                 .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(itemComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addButton)
-                    .addComponent(jumlahText, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jumlahText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(itemComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(addButton)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
