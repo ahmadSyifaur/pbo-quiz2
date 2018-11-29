@@ -35,9 +35,21 @@ public class Transaksi {
     public void setTotal() {
         float totalAkhir=0;
         for (Item item : this.items) {
-            total+=item.getTotal();
+            totalAkhir+=item.getTotal();
         }
         this.total=totalAkhir;
+    }
+    
+    public String transDetail() { 
+        setTotal();
+        String str = "";
+        str += "Kode\t\t: "+ this.code +"\n";
+        str += "Daftar Belanja : \n";
+        for(Item item : this.items) {
+            str += "\t"+ item.getNama() +"(x"+ item.getJumlah() +") : "+ item.getTotal() +"\n";
+        }
+        str += "Total\t\t: "+ this.total;
+        return str;
     }
     
     

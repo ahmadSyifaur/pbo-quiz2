@@ -24,6 +24,12 @@ public class TableModel extends DefaultTableModel{
     public String[] getNamaKolom() {
         return this.namaKolom;
     }
+
+    @Override
+    public String toString() {
+        return "TableModel{" + "namaKolom=" + namaKolom + '}';
+    }
+    
     
     
 }

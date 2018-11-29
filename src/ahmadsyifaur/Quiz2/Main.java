@@ -8,6 +8,7 @@ package ahmadsyifaur.Quiz2;
 import ahmadsyifaur.Quiz2.komponen.ComboBoxModel;
 import ahmadsyifaur.Quiz2.komponen.Item;
 import ahmadsyifaur.Quiz2.komponen.TableModel;
+import ahmadsyifaur.Quiz2.komponen.Transaksi;
 import java.text.SimpleDateFormat;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
@@ -270,10 +271,26 @@ public class Main extends javax.swing.JFrame {
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
+        try {
+            for (int i = 0; i < tableModel.getRowCount(); i++) {
+                String nama = tableModel.getValueAt(i, 0).toString();              // store the name and the qty into variables then;
+                float harga = new Float(tableModel.getValueAt(i, 1).toString());   // add each result to cart global variable as an Item object 
+                int jumlah = new Integer(tableModel.getValueAt(i, 2).toString());     //
+                this.items.add(new Item(nama, harga, jumlah));
+            }
+            Transaksi transaksi = new Transaksi(this.code, this.items); // instantiate Transact class with the current code and previously ommited cart
+            StringBuilder sbItem = new StringBuilder(); // Stringbuilder to handle the transaction output
+            sbItem.append(transaksi.transDetail()); // append transaction output
+            JOptionPane.showMessageDialog(this, sbItem, "Detail Transaksi", JOptionPane.INFORMATION_MESSAGE); // call the dialog with the stringbuilder's string
+            TransBaru();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
         // TODO add your handling code here:
+        this.jumlahText.setText("1");
         this.newButton.setEnabled(false);
         this.cancelButton.setEnabled(true);
         this.addButton.setEnabled(true);
