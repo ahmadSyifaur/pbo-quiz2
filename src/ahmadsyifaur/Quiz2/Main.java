@@ -273,10 +273,10 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             for (int i = 0; i < tableModel.getRowCount(); i++) {
-                String nama = tableModel.getValueAt(i, 0).toString();              // store the name and the qty into variables then;
-                float harga = new Float(tableModel.getValueAt(i, 1).toString());   // add each result to cart global variable as an Item object 
-                int jumlah = new Integer(tableModel.getValueAt(i, 2).toString());     //
-                this.items.add(new Item(nama, harga, jumlah));
+                String nama = tableModel.getValueAt(i, 0).toString();             //untuk menyimpan nama
+                float harga = new Float(tableModel.getValueAt(i, 1).toString());   //untuk menyimpan harga
+                int jumlah = new Integer(tableModel.getValueAt(i, 2).toString());  //untuk menyimpan jumlah
+                this.items.add(new Item(nama, harga, jumlah)); // untuk menambahkan item belanjaan baru
             }
             Transaksi transaksi = new Transaksi(this.code, this.items); // instantiate Transact class with the current code and previously ommited cart
             StringBuilder sbItem = new StringBuilder(); // Stringbuilder to handle the transaction output
