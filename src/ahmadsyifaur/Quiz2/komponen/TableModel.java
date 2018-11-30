@@ -20,7 +20,7 @@ public class TableModel extends DefaultTableModel{
             "Jumlah"
         };
     }
-
+    //untuk mengabil kolom pada table
     public String[] getNamaKolom() {
         return this.namaKolom;
     }

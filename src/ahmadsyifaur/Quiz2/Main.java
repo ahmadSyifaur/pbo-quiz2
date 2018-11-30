@@ -287,7 +287,7 @@ public class Main extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_saveButtonActionPerformed
-
+//menambahkan action pada button New
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
         // TODO add your handling code here:
         this.jumlahText.setText("1");
@@ -298,7 +298,7 @@ public class Main extends javax.swing.JFrame {
         this.itemComboBox.setEnabled(true);
         this.codeText.setText(this.setCode());
     }//GEN-LAST:event_newButtonActionPerformed
-
+//menambakan action pada buton Add
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
         String nama = this.itemComboBox.getSelectedItem().toString();
@@ -318,13 +318,13 @@ public class Main extends javax.swing.JFrame {
     private void itemComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_itemComboBoxActionPerformed
-
+//Menambahkan action pada button Cancel
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
         TransBaru();
         this.kurangID();
     }//GEN-LAST:event_cancelButtonActionPerformed
-
+//menambahkan action pada button Remove
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
         // TODO add your handling code here:
         if(ItemTabel.getSelectedRow()<0) {
