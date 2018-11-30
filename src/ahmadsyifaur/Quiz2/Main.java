@@ -278,10 +278,10 @@ public class Main extends javax.swing.JFrame {
                 int jumlah = new Integer(tableModel.getValueAt(i, 2).toString());  //untuk menyimpan jumlah
                 this.items.add(new Item(nama, harga, jumlah)); // untuk menambahkan item belanjaan baru
             }
-            Transaksi transaksi = new Transaksi(this.code, this.items); // instantiate Transact class with the current code and previously ommited cart
-            StringBuilder sbItem = new StringBuilder(); // Stringbuilder to handle the transaction output
-            sbItem.append(transaksi.transDetail()); // append transaction output
-            JOptionPane.showMessageDialog(this, sbItem, "Detail Transaksi", JOptionPane.INFORMATION_MESSAGE); // call the dialog with the stringbuilder's string
+            Transaksi transaksi = new Transaksi(this.code, this.items);
+            StringBuilder sbItem = new StringBuilder();
+            sbItem.append(transaksi.transDetail());
+            JOptionPane.showMessageDialog(this, sbItem, "Detail Transaksi", JOptionPane.INFORMATION_MESSAGE);
             TransBaru();
         } catch (Exception e) {
             System.out.println(e.getMessage());
